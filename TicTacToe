@@ -1,0 +1,132 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class TicTacToe{
+
+	public static void main(String[] args) {
+		computerPick();
+
+
+	}
+
+	public static void computerPick() {
+		Scanner console = new Scanner(System.in);
+		ArrayList<Integer> options = new ArrayList<Integer>(); 
+		for (int i = 1; i <= 9; i++) { 
+			options.add(new Integer(i)); 
+		} 
+		ArrayList<Integer> notOptions = new ArrayList<Integer>();
+
+		Collections.shuffle(options);
+		String topLeft = "_";
+		String topMiddle = "_";
+		String topRight = "_";
+		String middleLeft = "_";
+		String middleMiddle = "_";
+		String middleRight = "_";
+		String bottomLeft = " ";
+		String bottomMiddle = " ";
+		String bottomRight = " ";
+
+		System.out.println("_1_|_2_|_3_");
+		System.out.println("_4_|_5_|_6_");
+		System.out.println(" 7 | 8 | 9 ");
+
+		String game = "beingPlayed";
+
+		while(game != "finished") {
+			System.out.println("Choose spot");
+			int playerPick = console.nextInt();
+			while (notOptions.contains(playerPick)) {
+				System.out.println("Choose spot");
+				playerPick = console.nextInt();
+			}
+			notOptions.add(playerPick);
+
+			if (playerPick == 1) {
+				topLeft = "O";
+			} else if (playerPick == 2) {
+				topMiddle = "O";
+			} else if (playerPick == 3) {
+				topRight = "O";
+			} else if (playerPick == 4) {
+				middleLeft = "O";
+			} else if (playerPick == 5) {
+				middleMiddle = "O";
+			} else if (playerPick == 6) {
+				middleRight = "O";
+			} else if (playerPick == 7) {
+				bottomLeft = "O";
+			} else if (playerPick == 8) {
+				bottomMiddle = "O";
+			} else {
+				bottomRight = "O";
+			} 
+
+			System.out.printf("_%s_|_%s_|_%s_\n", topLeft, topMiddle, topRight);
+			System.out.printf("_%s_|_%s_|_%s_\n", middleLeft, middleMiddle, middleRight);
+			System.out.printf(" %s | %s | %s \n", bottomLeft, bottomMiddle, bottomRight);
+
+			if (notOptions.size() != 9) {
+				int computerPick = options.get(1);
+				while (notOptions.contains(computerPick)) {
+					options.remove(1);
+					computerPick = options.get(1);
+				}
+				System.out.println("Computer Pick:" + computerPick);
+				notOptions.add(computerPick);
+
+				if (computerPick == 1) {
+					topLeft = "X";
+				} else if (computerPick == 2) {
+					topMiddle = "X";
+				} else if (computerPick == 3) {
+					topRight = "X";
+				} else if (computerPick == 4) {
+					middleLeft = "X";
+				} else if (computerPick == 5) {
+					middleMiddle = "X";
+				} else if (computerPick == 6) {
+					middleRight = "X";
+				} else if (computerPick == 7) {
+					bottomLeft = "X";
+				} else if (computerPick == 8) {
+					bottomMiddle = "X";
+				} else {
+					bottomRight = "X";
+				} 
+
+				options.remove(1);
+
+				System.out.printf("_%s_|_%s_|_%s_\n", topLeft, topMiddle, topRight);
+				System.out.printf("_%s_|_%s_|_%s_\n", middleLeft, middleMiddle, middleRight);
+				System.out.printf(" %s | %s | %s \n", bottomLeft, bottomMiddle, bottomRight);
+			} else {
+
+			}
+
+
+			if ((topLeft == "X" && topMiddle == "X" && topRight == "X") || (middleLeft == "X" && middleMiddle == "X" && middleRight == "X") || (bottomLeft == "X" && bottomMiddle == "X" && bottomRight == "X") || (topLeft == "X" && middleMiddle == "X" && bottomRight == "X") || (bottomLeft == "X" && middleMiddle == "X" && topRight == "X") || (topLeft == "X" && middleLeft == "X" && bottomLeft == "X") || (topMiddle == "X" && middleMiddle == "X" && bottomMiddle == "X") || (topRight == "X" && middleRight == "X" && bottomRight == "X")) {
+				System.out.println("You lost");
+				game = "finished";
+			} else if ((topLeft == "O" && topMiddle == "O" && topRight == "O") || (middleLeft == "O" && middleMiddle == "O" && middleRight == "O") || (bottomLeft == "O" && bottomMiddle == "O" && bottomRight == "O") || (topLeft == "O" && middleMiddle == "O" && bottomRight == "O") || (bottomLeft == "O" && middleMiddle == "O" && topRight == "O") || (topLeft == "X" && middleLeft == "X" && bottomLeft == "X") || (topMiddle == "O" && middleMiddle == "O" && bottomMiddle == "O") || (topRight == "O" && middleRight == "O" && bottomRight == "O")) {
+				System.out.println("Yay you won!!");
+				game = "finished";
+			} else if (topLeft != "_" && topMiddle != "_" && topRight != "_" && middleLeft != "_" && middleMiddle != "_" && middleRight != "_" && bottomLeft != " " && bottomMiddle != " " && bottomRight != " ") {
+				System.out.println("Game tied");
+				game = "finished";
+			} else {
+
+			}
+
+		}
+
+
+	}
+
+}
+
+
+
